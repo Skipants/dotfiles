@@ -1,4 +1,8 @@
-export ZSH="~/.oh-my-zsh"
+#!/usr/local/bin/zsh
+
+set -o magicequalsubst
+
+export ZSH=~/.oh-my-zsh
 
 ZSH_THEME="muse"
 
