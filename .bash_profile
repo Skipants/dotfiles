@@ -51,6 +51,9 @@ if [[ $(type -P brew) ]]; then
   fi
 fi
 
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
 # Attempts to fix an issue with Xvfb not working correctly when using the headless gem
 #   https://github.com/leonid-shevtsov/headless#tmpx11-unix-is-missing
 if [ -f $(type -P xvfb) ] && [ ! -d "/tmp/.X11-unix" ]; then
