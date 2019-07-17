@@ -1,6 +1,6 @@
 export ZSH="~/.oh-my-zsh"
 
-ZSH_THEME="avit"
+ZSH_THEME="muse"
 
 plugins=(
   git
