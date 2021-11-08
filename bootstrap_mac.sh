@@ -22,6 +22,7 @@ export CPPFLAGS="-I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include
 export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/zlib/lib"
 
 homebrew_packages=(
+  asdf
   awscli
   coreutils
   freetype
@@ -33,7 +34,6 @@ homebrew_packages=(
   jpeg
   openssl
   postgresql
-  rbenv
   redis
   rust
   shellcheck
@@ -46,8 +46,6 @@ for pkg in "${homebrew_packages[@]}"
 do
   brew install "${pkg}"
 done
-
-brew cask install Sublime
 
 brew upgrade
 
@@ -62,6 +60,3 @@ if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   ln -fs "$(pwd -P)/.zshrc" ~/.zshrc
 fi
-
-eval "$(rbenv init -)" && gem install bundler
-
