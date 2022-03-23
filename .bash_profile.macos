@@ -26,19 +26,23 @@ function path() {
   echo $path
 }
 
+# PS1 is handled by ZSH so lets just ignore it for now eh
+#
 # PS_INFO="$GREEN\u$RESET$BLUE\w"
-PS_PATH="$BLUE\$(path)"
-PS_GIT="$GREEN\$(parse_git_branch)"
-PS_TIME="$RED[\t]"
-export PS1="${PS_TIME} ${PS_PATH} ${PS_GIT}${RESET}> "
+# PS_PATH="$BLUE\$(path)"
+# PS_GIT="$GREEN\$(parse_git_branch)"
+# PS_TIME="$RED[\t]"
+# export PS1="${PS_TIME} ${PS_PATH} ${PS_GIT}${RESET}> "
 
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export CPPFLAGS="-I/usr/local/opt/readline/include -I/usr/local/opt/qt@5.5/include"
+export DISABLE_SPRING=1
+export EDITOR="code --wait --new-window"
 export HISTCONTROL=ignorespace
 export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/qt@5.5/lib"
 export PKG_CONFIG_PATH="/usr/local/opt/qt@5.5/lib/pkgconfig"
 
-alias be="bundle exec"
+alias be=bundle exec
 
 if [[ $(type -P brew) ]]; then
   export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
