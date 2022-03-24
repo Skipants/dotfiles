@@ -9,8 +9,8 @@ plugins=(git gitfast history zeus ssh-agent bundler history-substring-search bre
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="$(brew --prefix)/sbin:$PATH"
-export PATH="$(brew --prefix)/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Homebrew autocompletion
 if type brew &>/dev/null; then
