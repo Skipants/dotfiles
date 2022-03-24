@@ -1,0 +1,3 @@
+Run bootstrap_mac.sh, duh
+
+Afterwards, install VSCode and in its command palette run "install 'code' command to PATH"

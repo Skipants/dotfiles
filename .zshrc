@@ -1,11 +1,3 @@
-# Homebrew autocompletion
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-  autoload -Uz compinit
-  compinit
-fi
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -16,6 +8,16 @@ ZSH_THEME="dracula"
 plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
 
 source $ZSH/oh-my-zsh.sh
+
+# Homebrew autocompletion
+export PATH="/opt/homebrew/bin:$PATH"
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 export VISUAL="code --wait --new-window"
 export EDITOR=$VISUAL
@@ -28,22 +30,28 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-alias -g vi=vim
+function update_profile() {
+  if [ $(pwd -P) == $HOME ]; then
+    \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
+  else
+    echo "Run me from the HOME dir, please... it makes things simpler."
+  fi
+}
 
 function jira() {
-    if [[ -n $1 ]]; then
-        ticket=$1
-    else
-        IFS='-'; local temp=($(git rev-parse --abbrev-ref HEAD))
-        ticket="${temp[1]}-${temp[2]}"
-    fi
+  if [[ -n $1 ]]; then
+    ticket=$1
+  else
+    IFS='-'; local temp=($(git rev-parse --abbrev-ref HEAD))
+    ticket="${temp[1]}-${temp[2]}"
+  fi
 
-    open "https://financeit.atlassian.net/browse/${ticket}"
+  open "https://financeit.atlassian.net/browse/${ticket}"
 }
 
 # Replace BSD utils with GNU ones
-PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
 
 # Find Homebrew libxml and libxlst
 export PATH="$PATH:/usr/local/opt/libxml2/bin:/usr/local/opt/libxslt/bin"
@@ -70,12 +78,13 @@ export BUNDLE_BUILD__GITHUB___MARKDOWN="--with-cflags=-Wno-error=implicit-functi
 export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include"
 export BUNDLE_BUILD__THIN="--with-cflags=-Wno-error=implicit-function-declaration"
 
-alias be="bundle exec"
-alias code="code -w --new-window"
+alias -g be="bundle exec"
+alias -g vi=vim
+
 alias tf=terraform
 
-git config alias.br=branch
-git config alias.co=checkout
-git config alias.st=status
+git config --global alias.br branch
+git config --global alias.co checkout
+git config --global alias.st status
 
 source <(kubectl completion zsh)
