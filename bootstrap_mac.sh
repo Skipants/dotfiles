@@ -109,20 +109,22 @@ if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-if [ ! -d ~/.oh-my-zsh/themes/dracula.zsh-theme ]; then
-  \curl --output ~/.oh-my-zsh/themes/dracula.zsh-theme https://raw.githubusercontent.com/dracula/zsh/master/dracula.zsh-theme
+if [ ! -d ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ]; then
+  git clone git@github.com:dracula/zsh ~/.oh-my-zsh/themes/dracula
 fi
 
 cp "$(pwd -P)/.zshrc" ~/
-cp -i "$(pwd -P)/.bash_profile.macos" ~/.bash_profile
+
+# I don't think I care about this right now
+# cp -i "$(pwd -P)/.bash_profile.macos" ~/.bash_profile
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # Needed sudo permissions here or chmod /usr/local/opt... not sure what i want to do
-# asdf plugin add ruby
-# asdf install ruby latest
-# asdf global ruby latest
-# gem install bundler
+asdf plugin add ruby
+asdf install ruby latest
+asdf global ruby latest
+gem install bundler
 
 if [[ ! -f ~/.vim/colors/monokai.vim ]]; then
   mkdir -p ~/.vim/colors/

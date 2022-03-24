@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 unsetopt auto_cd
 
-ZSH_THEME="dracula"
+ZSH_THEME="dracula/dracula"
 
 plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
 
@@ -31,8 +31,9 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
 function update_profile() {
-  if [ $(pwd -P) == $HOME ]; then
+  if [ $(pwd -P) = $HOME ]; then
     \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
+    source .zshrc
   else
     echo "Run me from the HOME dir, please... it makes things simpler."
   fi
