@@ -9,11 +9,12 @@ plugins=(git gitfast history zeus ssh-agent bundler history-substring-search bre
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$(brew --prefix)/sbin:$PATH"
+export PATH="$(brew --prefix)/bin:$PATH"
 
 # Homebrew autocompletion
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
 
   autoload -Uz compinit
   compinit
@@ -51,32 +52,32 @@ function jira() {
 }
 
 # Replace BSD utils with GNU ones
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
+export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
+export MANPATH="$(brew --prefix)/opt/grep/libexec/gnuman:$MANPATH"
 
 # Find Homebrew libxml and libxlst
-export PATH="$PATH:/usr/local/opt/libxml2/bin:/usr/local/opt/libxslt/bin"
-export LDFLAGS="$LDFLAGS -L/usr/local/opt/libxml2/lib -L/usr/local/opt/libxslt/lib -L/usr/local/opt/libffi/lib"
-export CPPFLAGS="$CPPFLAGS -I/usr/local/opt/libxml2/include -I/usr/local/opt/libxslt/include"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/opt/libxml2/lib/pkgconfig:/usr/local/opt/libxslt/lib/pkgconfig:/usr/local/opt/libffi/lib/pkgconfig"
+export PATH="$PATH:$(brew --prefix)/opt/libxml2/bin:$(brew --prefix)/opt/libxslt/bin"
+export LDFLAGS="$LDFLAGS -L$(brew --prefix)/opt/libxml2/lib -L$(brew --prefix)/opt/libxslt/lib -L$(brew --prefix)/opt/libffi/lib"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix)/opt/libxml2/include -I$(brew --prefix)/opt/libxslt/include"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$(brew --prefix)/opt/libxml2/lib/pkgconfig:$(brew --prefix)/opt/libxslt/lib/pkgconfig:$(brew --prefix)/opt/libffi/lib/pkgconfig"
 export ARCHFLAGS='-arch x86_64'
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Find Homebrew imagemagick
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-export LDFLAGS="$LDFLAGS -L/usr/local/opt/imagemagick@6/lib"
-export CPPFLAGS="$CPPFLAGS -I/usr/local/opt/imagemagick@6/include"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/opt/imagemagick@6/lib/pkgconfig"
+export PATH="$(brew --prefix)/opt/imagemagick@6/bin:$PATH"
+export LDFLAGS="$LDFLAGS -L$(brew --prefix)/opt/imagemagick@6/lib"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix)/opt/imagemagick@6/include"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$(brew --prefix)/opt/imagemagick@6/lib/pkgconfig"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 PATH=/usr/local/bin:$PATH
 
-. $HOME/.asdf/asdf.sh
-. /Users/aszczepanski/.asdf/asdf.sh
+. "$(brew --prefix)/opt/asdf/libexec/asdf.sh"
+
 export PATH="$(brew --prefix imagemagick@6)/bin:$PATH"
 export BUNDLE_BUILD__GITHUB___MARKDOWN="--with-cflags=-Wno-error=implicit-function-declaration"
-export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include"
+export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L$(brew --prefix)/opt/openssl/lib --with-cppflags=-I$(brew --prefix)/opt/openssl/include"
 export BUNDLE_BUILD__THIN="--with-cflags=-Wno-error=implicit-function-declaration"
 
 alias -g be="bundle exec"

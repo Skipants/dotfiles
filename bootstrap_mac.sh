@@ -14,13 +14,14 @@ else
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
 brew install readline && brew link readline
 brew install zlib
 
-export CPPFLAGS="-I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include"
-export LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I$(brew --prefix)/opt/readline/include -I$(brew --prefix)/opt/zlib/include"
+export LDFLAGS="-L$(brew --prefix)/opt/readline/lib -L$(brew --prefix)/opt/zlib/lib"
 
 brew upgrade
 
@@ -38,7 +39,7 @@ brew install mas
 brew install openssl
 brew install postgresql
 brew install redis
-brew install rust
+# brew install rust  ## Currently hangs
 brew install shellcheck
 brew install sqlite
 brew install terraform
@@ -65,9 +66,10 @@ if [ ! -d ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.j
   cp "$(pwd -P)/iterm_profiles.json" ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.json
 fi
 
-if [ ! -d "/Applications/Skitch.app" ]; then
-  mas install 425955336 # Skitch
-fi
+# I have to look into my license with this
+# if [ ! -d "/Applications/Skitch.app" ]; then
+#   mas install 425955336 # Skitch
+# fi
 
 if [ ! -d "/Applications/Slack.app" ]; then
   mas install 803453959 # Slack
@@ -94,7 +96,6 @@ function installdmg {
 # if [ ! -d "/Applications/Rancher Desktop.app" ]; then
 #  installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.2.0/Rancher.Desktop-1.2.0.aarch64.dmg
 # fi
-I
 if [ ! -d "/Applications/Google Chrome.app" ]; then
   installdmg https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
 fi
