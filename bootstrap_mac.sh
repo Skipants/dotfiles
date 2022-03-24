@@ -4,13 +4,17 @@ set -u
 
 cd "$(dirname $0)" || exit
 
-xcode-select install
+# I don't do xcode-select install in this script because it is needed for git, so I can't get this script without it
+#  comment is here so I remember that next time
+# xcode-select install
 
 if [ -x "$(command -v brew)" ]; then
   brew update
 else
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+export PATH="/opt/homebrew/bin:$PATH"
 
 brew install readline && brew link readline
 brew install zlib
@@ -61,8 +65,13 @@ if [ ! -d ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.j
   cp "$(pwd -P)/iterm_profiles.json" ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.json
 fi
 
-mas install 425955336 # Skitch
-mas install 803453959 # Slack
+if [ ! -d "/Applications/Skitch.app" ]; then
+  mas install 425955336 # Skitch
+fi
+
+if [ ! -d "/Applications/Slack.app" ]; then
+  mas install 803453959 # Slack
+fi
 
 function installdmg {
     set -x
@@ -81,17 +90,19 @@ function installdmg {
     set +x
 }
 
-if [ ! -d "/Applications/Rancher Desktop" ]; then
-  installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.2.0/Rancher.Desktop-1.2.0.aarch64.dmg
-fi
-
-if [ ! -d "/Applications/Google Chrome" ]; then
+# This failed installing -- the download worked fine though
+# if [ ! -d "/Applications/Rancher Desktop.app" ]; then
+#  installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.2.0/Rancher.Desktop-1.2.0.aarch64.dmg
+# fi
+I
+if [ ! -d "/Applications/Google Chrome.app" ]; then
   installdmg https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
 fi
 
-if [ ! -d "/Applications/zoom.us" ]; then
-  sudo installer -pkg https://zoom.us/client/latest/Zoom.pkg -target /
-fi
+# Failed to download
+# if [ ! -d "/Applications/zoom.us.app" ]; then
+#   sudo installer -pkg https://zoom.us/client/latest/Zoom.pkg -target /
+# fi
 
 if [ ! -d ~/.oh-my-zsh ]; then
   rm ~/.zshrc # Prevent oh my zsh from making a copy
@@ -99,23 +110,19 @@ if [ ! -d ~/.oh-my-zsh ]; then
   cp "$(pwd -P)/.zshrc" ~/
 fi
 
-cp -i "$(pwd -P)/.bashrc" ~/.bashrc
-cp -i "$(pwd -P)/.bash_profile" ~/.bash_profile
+cp -i "$(pwd -P)/.bash_profile.macos" ~/.bash_profile
 
-asdf plugin add ruby
-asdf install ruby latest
-asdf global ruby latest
-gem install bundler
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+# Needed sudo permissions here or chmod /usr/local/opt... not sure what i want to do
+# asdf plugin add ruby
+# asdf install ruby latest
+# asdf global ruby latest
+# gem install bundler
 
 if [[ ! -f ~/.vim/colors/monokai.vim ]]; then
   mkdir -p ~/.vim/colors/
   (cd ~/.vim/colors/ && curl -O https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim)
-fi
-
-if [ ! -d ~/.oh-my-zsh ]; then
-  rm ~/.zshrc # Prevent oh my zsh from making a copy
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  ln -fs "$(pwd -P)/.zshrc" ~/.zshrc
 fi
 
 echo "Just install VSCode separately I'm tired of automating this!!!"
