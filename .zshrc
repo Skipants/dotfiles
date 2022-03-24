@@ -56,9 +56,9 @@ export LC_ALL=en_US.UTF-8
 
 # Find Homebrew imagemagick
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/imagemagick@6/lib"
-export CPPFLAGS="-I/usr/local/opt/imagemagick@6/include"
-export PKG_CONFIG_PATH="/usr/local/opt/imagemagick@6/lib/pkgconfig"
+export LDFLAGS="$LDFLAGS -L/usr/local/opt/imagemagick@6/lib"
+export CPPFLAGS="$CPPFLAGS -I/usr/local/opt/imagemagick@6/include"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/opt/imagemagick@6/lib/pkgconfig"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 PATH=/usr/local/bin:$PATH
@@ -70,6 +70,12 @@ export BUNDLE_BUILD__GITHUB___MARKDOWN="--with-cflags=-Wno-error=implicit-functi
 export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include"
 export BUNDLE_BUILD__THIN="--with-cflags=-Wno-error=implicit-function-declaration"
 
+alias be="bundle exec"
+alias code="code -w --new-window"
 alias tf=terraform
+
+git config alias.br=branch
+git config alias.co=checkout
+git config alias.st=status
 
 source <(kubectl completion zsh)

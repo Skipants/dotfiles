@@ -107,9 +107,9 @@ fi
 if [ ! -d ~/.oh-my-zsh ]; then
   rm ~/.zshrc # Prevent oh my zsh from making a copy
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  cp "$(pwd -P)/.zshrc" ~/
 fi
 
+cp "$(pwd -P)/.zshrc" ~/
 cp -i "$(pwd -P)/.bash_profile.macos" ~/.bash_profile
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
