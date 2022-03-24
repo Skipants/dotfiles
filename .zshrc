@@ -85,6 +85,9 @@ alias -g vi=vim
 
 alias tf=terraform
 
+# I'll put these in a config file later
+git config --global user.name "Andrew Szczepanski"
+git config --global user.email aszczepanski@financeit.io # Just going to use my work email for now
 git config --global alias.br branch
 git config --global alias.co checkout
 git config --global alias.st status
