@@ -2,13 +2,13 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # ZSH Options
-unsetopt autocd
-
 ZSH_THEME="dracula/dracula"
 
 plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
 
 source $ZSH/oh-my-zsh.sh
+
+unsetopt AUTO_CD
 
 # My custom functions
 function update_profile() {
