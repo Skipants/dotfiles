@@ -117,3 +117,5 @@ git config --global alias.st status
 # Sourcing
 # . "$(brew --prefix asdf)/libexec/asdf.sh"
 # asdf fix your shit, gd. I am legitmately tired of fiddling with bundler versions and defaults all the time.
+
+eval "$(rbenv init - zsh)"
