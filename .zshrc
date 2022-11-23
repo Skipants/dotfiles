@@ -27,7 +27,7 @@ function jira() {
     ticket="${temp[1]}-${temp[2]}"
   fi
 
-  open "https://financeit.atlassian.net/browse/${ticket}"
+  open "https://wonolodev.atlassian.net/browse/${ticket}"
 }
 
 function update_profile() {
