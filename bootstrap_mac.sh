@@ -11,7 +11,7 @@ cd "$(dirname $0)" || exit
 if [ -x "$(command -v brew)" ]; then
   brew update
 else
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 export PATH="/opt/homebrew/sbin:$PATH"
@@ -50,12 +50,9 @@ brew install --cask chef-workstation
 brew install --cask chromedriver
 brew install --cask firefox
 brew install --cask iterm2
-brew install --cask java
 brew install --cask libreoffice
-brew install --cask spectacle
 brew install --cask spotify
 brew install --cask spotmenu
-brew install --cask vagrant
 brew install --cask virtualbox
 
 if [ ! -d ~/.vimrc ]; then

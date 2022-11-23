@@ -10,14 +10,13 @@ source $ZSH/oh-my-zsh.sh
 
 unsetopt AUTO_CD
 
-# My custom functions
-function update_profile() {
-  if [ $(pwd -P) = $HOME ]; then
-    \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
-    source .zshrc
-  else
-    echo "Run me from the HOME dir, please... it makes things simpler."
-  fi
+# Custom functions
+function find_ssm(){
+  aws ssm get-parameters-by-path --recursive --path "$1" --profile ${2:-dev}-lead
+}
+
+function get_ssm(){
+  aws ssm get-parameter --name "$1" --with-decryption --profile ${2:-dev}-lead | jq .Parameter.Value
 }
 
 function jira() {
@@ -29,6 +28,15 @@ function jira() {
   fi
 
   open "https://financeit.atlassian.net/browse/${ticket}"
+}
+
+function update_profile() {
+  if [ $(pwd -P) = $HOME ]; then
+    \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
+    source .zshrc
+  else
+    echo "Run me from the HOME dir, please... it makes things simpler."
+  fi
 }
 
 # Update paths
