@@ -25,7 +25,7 @@ export LDFLAGS="-L$(brew --prefix)/opt/readline/lib -L$(brew --prefix)/opt/zlib/
 
 brew upgrade
 
-brew install asdf
+# brew install asdf # Currently sucks at picking the right bundler version
 brew install awscli
 brew install coreutils
 brew install freetype
