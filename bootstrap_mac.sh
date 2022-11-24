@@ -36,6 +36,7 @@ brew install go
 brew install htop
 brew install jpeg
 brew install mas
+brew install nvm
 brew install openssl
 brew install postgresql
 brew install redis
