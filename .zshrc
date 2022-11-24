@@ -86,9 +86,13 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# Aliases
+# Global Aliases
+#  This allows these commands to be piped to rather than just used on their own
 alias -g be="bundle exec"
 alias -g vi=vim
+
+# Aliases
+alias aws-mfa='oathtool --totp --base32 --digits=6 $AWS_WONOLO_TOTP_KEY | pbcopy'
 alias tf=terraform
 
 # Bindkeys
