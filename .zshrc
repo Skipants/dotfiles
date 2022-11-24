@@ -119,11 +119,11 @@ git config --global alias.st status
 
 # # Setting up a convention for a secrets file. I would really like to encrypt/decrypt this file at some point.
 # #   If you are reading this and have a good idea how let me know. Maybe with gpg?
-# if [ -s ~/.secrets.env ]; then
-#   set -allexport
-#   . ~/.secrets.env
-#   set +allexport
-# fi
+if [ -s ~/.secrets.env ]; then
+  set -o allexport
+  . ~/.secrets.env
+  set +o allexport
+fi
 
 # Sourcing
 # . "$(brew --prefix asdf)/libexec/asdf.sh"
