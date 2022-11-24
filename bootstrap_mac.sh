@@ -56,11 +56,11 @@ brew install --cask spotify
 brew install --cask spotmenu
 brew install --cask virtualbox
 
-if [ ! -d ~/.vimrc ]; then
+if [ ! -e ~/.vimrc ]; then
   cp "$(pwd -P)/.vimrc" ~/.vimrc
 fi
 
-if [ ! -d ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.json ]; then
+if [ ! -e ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.json ]; then
   cp "$(pwd -P)/iterm_profiles.json" ~/Library/Application\ Support/iTerm2/DynamicProfiles/iterm_profiles.json
 fi
 
@@ -69,7 +69,7 @@ fi
 #   mas install 425955336 # Skitch
 # fi
 
-if [ ! -d "/Applications/Slack.app" ]; then
+if [ ! -e "/Applications/Slack.app" ]; then
   mas install 803453959 # Slack
 fi
 
@@ -94,7 +94,7 @@ function installdmg {
 # if [ ! -d "/Applications/Rancher Desktop.app" ]; then
 #  installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.2.0/Rancher.Desktop-1.2.0.aarch64.dmg
 # fi
-if [ ! -d "/Applications/Google Chrome.app" ]; then
+if [ ! -e "/Applications/Google Chrome.app" ]; then
   installdmg https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
 fi
 
@@ -103,12 +103,12 @@ fi
 #   sudo installer -pkg https://zoom.us/client/latest/Zoom.pkg -target /
 # fi
 
-if [ ! -d ~/.oh-my-zsh ]; then
+if [ ! -e ~/.oh-my-zsh ]; then
   rm ~/.zshrc # Prevent oh my zsh from making a copy
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-if [ ! -d ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ]; then
+if [ ! -e ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ]; then
   git clone git@github.com:dracula/zsh ~/.oh-my-zsh/themes/dracula
 fi
 
