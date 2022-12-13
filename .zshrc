@@ -23,8 +23,10 @@ function jira() {
   if [[ -n $1 ]]; then
     ticket=$1
   else
+    OLDIFS=$IFS
     IFS='-'; local temp=($(git rev-parse --abbrev-ref HEAD))
     ticket="${temp[1]}-${temp[2]}"
+    IFS=$OLDIFS
   fi
 
   open "https://wonolodev.atlassian.net/browse/${ticket}"
