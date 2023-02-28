@@ -30,6 +30,7 @@ brew install awscli
 brew install coreutils
 brew install freetype
 brew install git
+brew install gnu-time
 brew install gnupg
 brew install gnutls
 brew install go
