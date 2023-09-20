@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH Options
 ZSH_THEME="dracula/dracula"
 
-plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew dotenv)
+plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -34,7 +34,11 @@ function jira() {
 
 function update_profile() {
   if [ $(pwd -P) = $HOME ]; then
+<<<<<<< Updated upstream
     \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
+=======
+    cp -f /Users/andrewszczepanski/dotfiles/.zshrc .
+>>>>>>> Stashed changes
     source .zshrc
   else
     echo "Run me from the HOME dir, please... it makes things simpler."
