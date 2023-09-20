@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH Options
 ZSH_THEME="dracula/dracula"
 
-plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
+plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew dotenv)
 
 source $ZSH/oh-my-zsh.sh
 
