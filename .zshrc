@@ -34,11 +34,7 @@ function jira() {
 
 function update_profile() {
   if [ $(pwd -P) = $HOME ]; then
-<<<<<<< Updated upstream
     \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
-=======
-    cp -f /Users/andrewszczepanski/dotfiles/.zshrc .
->>>>>>> Stashed changes
     source .zshrc
   else
     echo "Run me from the HOME dir, please... it makes things simpler."
