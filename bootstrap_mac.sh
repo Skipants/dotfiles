@@ -26,6 +26,7 @@ brew upgrade
 brew install awscli
 brew install coreutils
 brew install freetype
+brew install gh
 brew install git
 brew install gnu-time
 brew install gnupg
