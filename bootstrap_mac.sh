@@ -4,10 +4,6 @@ set -u
 
 cd "$(dirname $0)" || exit
 
-# I don't do xcode-select install in this script because it is needed for git, so I can't get this script without it
-#  comment is here so I remember that next time
-# xcode-select install
-
 if [ -x "$(command -v brew)" ]; then
   brew update
 else
@@ -25,7 +21,7 @@ export LDFLAGS="-L$(brew --prefix)/opt/readline/lib -L$(brew --prefix)/opt/zlib/
 
 brew upgrade
 
-# brew install asdf # Currently sucks at picking the right bundler version
+brew install asdf
 brew install awscli
 brew install coreutils
 brew install freetype
@@ -41,7 +37,7 @@ brew install nvm
 brew install openssl
 brew install postgresql
 brew install redis
-# brew install rust  ## Currently hangs
+brew install rust
 brew install shellcheck
 brew install sqlite
 brew install terraform
@@ -91,10 +87,10 @@ function installdmg {
     set +x
 }
 
-# This failed installing -- the download worked fine though
-# if [ ! -d "/Applications/Rancher Desktop.app" ]; then
-#  installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.2.0/Rancher.Desktop-1.2.0.aarch64.dmg
-# fi
+if [ ! -d "/Applications/Rancher Desktop.app" ]; then
+ installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.12.1/Rancher.Desktop-1.12.1.aarch64.dmg
+fi
+
 if [ ! -e "/Applications/Google Chrome.app" ]; then
   installdmg https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
 fi
