@@ -1,3 +1,11 @@
-Run bootstrap_mac.sh, duh
+For Mac
+
+0. Run xcode-select install
+
+Install
+
+1. Install git
+2. Pull this repo
+3. Run bootstrap_$ENV.sh
 
 Afterwards, install VSCode and in its command palette run "install 'code' command to PATH"
