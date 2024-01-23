@@ -1,1 +1,4 @@
 - Automate changing CAPSLOCK modifier key to ESC
+- Find some way to merge .___rc files rather than clobbering them
+- Figure out how to automate downloading and installing Wezterm
+- Make it so brew cask install doesnt download if the app is already installed -- might be better to patch brew itself

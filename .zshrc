@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH Options
 ZSH_THEME="dracula/dracula"
 
-plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
+plugins=(asdf git gitfast history zeus ssh-agent bundler history-substring-search brew)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,12 +113,6 @@ export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export VISUAL="code --wait --new-window"
 
-# Git config -- I'll put these in a config file later
-git config --global user.name "Andrew Szczepanski"
-git config --global alias.br branch
-git config --global alias.co checkout
-git config --global alias.st status
-
 # # Setting up a convention for a secrets file. I would really like to encrypt/decrypt this file at some point.
 # #   If you are reading this and have a good idea how let me know. Maybe with gpg?
 if [ -s ~/.secrets.env ]; then
@@ -128,11 +122,8 @@ if [ -s ~/.secrets.env ]; then
 fi
 
 # Sourcing
-# . "$(brew --prefix asdf)/libexec/asdf.sh"
-# asdf fix your shit, gd. I am legitmately tired of fiddling with bundler versions and defaults all the time.
+. "$(brew --prefix asdf)/libexec/asdf.sh"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-eval "$(rbenv init - zsh)"
