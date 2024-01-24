@@ -99,7 +99,7 @@ if [ ! -e ~/.oh-my-zsh ]; then
 fi
 
 if [ ! -e ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ]; then
-  git clone git@github.com:dracula/zsh ~/.oh-my-zsh/themes/dracula
+  git clone https://github.com/dracula/zsh.git ~/.oh-my-zsh/themes/dracula
 fi
 
 if [ ! -e ~/.pryrc ]; then
