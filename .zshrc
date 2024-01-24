@@ -104,7 +104,6 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
 # Other environment variables
-export ARCHFLAGS='-arch x86_64'
 export BUNDLE_BUILD__GITHUB___MARKDOWN="--with-cflags=-Wno-error=implicit-function-declaration"
 export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L$(brew --prefix openssl)/lib --with-cppflags=-I$(brew --prefix openssl)/include"
 export BUNDLE_BUILD__THIN="--with-cflags=-Wno-error=implicit-function-declaration"
