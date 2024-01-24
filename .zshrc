@@ -29,7 +29,7 @@ function jira() {
     IFS=$OLDIFS
   fi
 
-  open "https://wonolodev.atlassian.net/browse/${ticket}"
+  open "https://financeit.atlassian.net/browse/${ticket}"
 }
 
 function update_profile() {
