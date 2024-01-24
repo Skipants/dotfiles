@@ -4,8 +4,6 @@ set -u
 
 cd "$(dirname $0)" || exit
 
-$(pwd -P)/git_setup.sh
-
 if [ -x "$(command -v brew)" ]; then
   brew update
 else
@@ -44,6 +42,8 @@ brew install sqlite
 brew install terraform
 brew install vim
 brew install zsh
+
+$(pwd -P)/git_setup.sh
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 . "$HOME/.asdf/asdf.sh"
