@@ -24,7 +24,7 @@ brew upgrade
 brew install awscli
 brew install cmake
 brew install coreutils
-brew install docker docker-compose
+brew install docker docker-compose docker-credential-helper
 brew install freetype
 brew install gh
 brew install git
