@@ -48,6 +48,7 @@ path+=(
   /opt/homebrew/sbin
   /opt/homebrew/bin
   $HOME/bin
+  $HOME/.rd/bin # Rancher desktop
 )
 
 # Need to have brew in path before I can use the prefixes

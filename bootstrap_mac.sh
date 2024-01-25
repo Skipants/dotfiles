@@ -22,7 +22,9 @@ export LDFLAGS="-L$(brew --prefix)/opt/readline/lib -L$(brew --prefix)/opt/zlib/
 brew upgrade
 
 brew install awscli
+brew install cmake
 brew install coreutils
+brew install docker docker-compose
 brew install freetype
 brew install gh
 brew install git
