@@ -108,10 +108,11 @@ bindkey '^e' end-of-line
 export BUNDLE_BUILD__GITHUB___MARKDOWN="--with-cflags=-Wno-error=implicit-function-declaration"
 export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L$(brew --prefix openssl)/lib --with-cppflags=-I$(brew --prefix openssl)/include"
 export BUNDLE_BUILD__THIN="--with-cflags=-Wno-error=implicit-function-declaration"
-export EDITOR=$VISUAL
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
 export VISUAL="code --wait --new-window"
+export EDITOR=$VISUAL
 
 # # Setting up a convention for a secrets file. I would really like to encrypt/decrypt this file at some point.
 # #   If you are reading this and have a good idea how let me know. Maybe with gpg?
