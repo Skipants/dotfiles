@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH Options
 ZSH_THEME="dracula/dracula"
 
-plugins=(asdf git gitfast history zeus ssh-agent bundler history-substring-search brew)
+plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -125,3 +125,10 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/Users/aszczepanski/.bun/_bun" ] && source "/Users/aszczepanski/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -47,9 +47,10 @@ brew install zsh
 
 $(pwd -P)/git_setup.sh
 
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
-. "$HOME/.asdf/asdf.sh"
-asdf update
+# TODO replace with mise when not lazy
+# git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+# . "$HOME/.asdf/asdf.sh"
+# asdf update
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
@@ -120,10 +121,11 @@ fi
 # cp -i "$(pwd -P)/.bash_profile.macos" ~/.bash_profile
 
 # Needed sudo permissions here or chmod /usr/local/opt... not sure what i want to do
-asdf plugin add ruby
-asdf install ruby latest
-asdf global ruby latest
-gem install bundler
+# TODO replace with mise when im not lazy
+# asdf plugin add ruby
+# asdf install ruby latest
+# asdf global ruby latest
+# gem install bundler
 
 if [[ ! -f ~/.vim/colors/monokai.vim ]]; then
   mkdir -p ~/.vim/colors/
