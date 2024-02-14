@@ -47,11 +47,8 @@ brew install zsh
 
 $(pwd -P)/git_setup.sh
 
-# TODO replace with mise when not lazy
-# git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
-# . "$HOME/.asdf/asdf.sh"
-# asdf update
-
+curl https://mise.run | sh
+eval "$(/Users/aszczepanski/.local/bin/mise activate zsh)"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 brew install --cask chromedriver
@@ -117,15 +114,8 @@ if [ ! -e ~/.zshrc ]; then
   cp "$(pwd -P)/.zshrc" ~/
 fi
 
-# I don't think I care about this right now
-# cp -i "$(pwd -P)/.bash_profile.macos" ~/.bash_profile
-
-# Needed sudo permissions here or chmod /usr/local/opt... not sure what i want to do
-# TODO replace with mise when im not lazy
-# asdf plugin add ruby
-# asdf install ruby latest
-# asdf global ruby latest
-# gem install bundler
+mise use -g ruby@latest
+gem install bundler
 
 if [[ ! -f ~/.vim/colors/monokai.vim ]]; then
   mkdir -p ~/.vim/colors/
