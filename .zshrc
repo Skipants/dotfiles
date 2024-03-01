@@ -12,7 +12,7 @@ unsetopt AUTO_CD
 
 # Custom functions
 function changed_files(){
-  files_to_check=$(git diff --cached --name-only --diff-filter=ACM | grep "\\.${1:-rb}$")
+  git diff --cached --name-only --diff-filter=ACM | grep "\\.${1:-rb}$"
 }
 
 function find_ssm(){
