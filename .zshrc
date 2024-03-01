@@ -11,6 +11,10 @@ source $ZSH/oh-my-zsh.sh
 unsetopt AUTO_CD
 
 # Custom functions
+function changed_files(){
+  files_to_check=$(git diff --cached --name-only --diff-filter=ACM | grep "\\.${1:-rb}$")
+}
+
 function find_ssm(){
   aws ssm get-parameters-by-path --recursive --path "$1" --profile ${2:-dev}-lead
 }
@@ -29,7 +33,7 @@ function jira() {
     IFS=$OLDIFS
   fi
 
-  open "https://financeit.atlassian.net/browse/${ticket}"
+  open "https://${JIRA_SUBDOMAIN}.atlassian.net/browse/${ticket}"
 }
 
 function update_profile() {
@@ -132,3 +136,5 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+eval "$(/Users/aszczepanski/.local/bin/mise activate zsh)"
