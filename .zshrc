@@ -26,7 +26,7 @@ function get_ssm(){
 # The prefix before "--". eg current_branch_prefix of "ABC-123--hello" is "ABC-123"
 function current_branch_prefix() {
   local branch_name=$(git rev-parse --abbrev-ref HEAD)
-  printf "%s" "${branch_name%%--*}"
+  echo "${branch_name%%--*}"
 }
 
 function jira() {
