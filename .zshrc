@@ -23,14 +23,17 @@ function get_ssm(){
   aws ssm get-parameter --name "$1" --with-decryption --profile ${2:-dev}-lead | jq .Parameter.Value
 }
 
+# The prefix before "--". eg current_branch_prefix of "ABC-123--hello" is "ABC-123"
+function current_branch_prefix() {
+  local branch_name=$(git rev-parse --abbrev-ref HEAD)
+  printf "%s" "${branch_name%%--*}"
+}
+
 function jira() {
   if [[ -n $1 ]]; then
     ticket=$1
   else
-    OLDIFS=$IFS
-    IFS='-'; local temp=($(git rev-parse --abbrev-ref HEAD))
-    ticket="${temp[1]}-${temp[2]}"
-    IFS=$OLDIFS
+    ticket=$(current_branch_prefix)
   fi
 
   open "https://${JIRA_SUBDOMAIN}.atlassian.net/browse/${ticket}"
