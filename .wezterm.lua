@@ -11,7 +11,9 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-
+config.check_for_updates_interval_seconds = 604800
+config.font_size = 16
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
 config.keys = { -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
 {

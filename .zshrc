@@ -71,6 +71,7 @@ LDFLAGS+=(
   -L$(brew --prefix libxml2)/lib
   -L$(brew --prefix libxslt)/lib
   -L$(brew --prefix mysql@5.7)/lib
+  -L$(brew --prefix zlib)/lib
 )
 
 CPPFLAGS+=(
@@ -78,6 +79,7 @@ CPPFLAGS+=(
   -I$(brew --prefix libxml2)/include
   -I$(brew --prefix libxslt)/include
   -I$(brew --prefix mysql@5.7)/include
+  -I$(brew --prefix zlib)/include
 )
 
 PKG_CONFIG_PATH+=(
@@ -86,6 +88,7 @@ PKG_CONFIG_PATH+=(
   $(brew --prefix libxml2)/lib/pkgconfig
   $(brew --prefix libxslt)/lib/pkgconfig
   $(brew --prefix mysql@5.7)/lib/pkgconfig
+  $(brew --prefix zlib)/lib/pkgconfig
 )
 
 # Homebrew autocompletion

@@ -43,6 +43,7 @@ brew install shellcheck
 brew install sqlite
 brew install terraform
 brew install vim
+brew install zlib
 brew install zsh
 
 $(pwd -P)/git_setup.sh
@@ -122,5 +123,8 @@ if [[ ! -f ~/.vim/colors/monokai.vim ]]; then
   (cd ~/.vim/colors/ && curl -O https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim)
 fi
 
-echo "Just install VSCode separately I'm tired of automating this!!!"
-echo "You're using settings syncing so that should update automatically if you allow it to."
+if [ ! -e "/Applications/Visual Studio Code.app" ]; then
+  curl "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
+  tar -xvf VSCode-darwin-universal.zip
+  mv "Visual Studio Code.app" /Applications/
+fi
