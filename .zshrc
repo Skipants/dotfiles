@@ -123,6 +123,7 @@ export LC_CTYPE=en_US.UTF-8
 
 export VISUAL="code --wait --new-window"
 export EDITOR=$VISUAL
+export PAGER=less
 
 # # Setting up a convention for a secrets file. I would really like to encrypt/decrypt this file at some point.
 # #   If you are reading this and have a good idea how let me know. Maybe with gpg?
