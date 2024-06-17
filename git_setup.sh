@@ -10,7 +10,10 @@ git config --global alias.st status
 git config --global branch.sort -committerdate
 git config --global pull.ff only
 git config --global push.autoSetupRemote true
+git config --global rebase.autosquash true
+git config --global rebase.updateRefs true
 git config --global rerere.enabled true
+
 
 # Signing w/ SSH
 git config --global commit.gpgsign true
