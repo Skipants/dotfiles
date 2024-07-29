@@ -14,6 +14,7 @@ end
 config.check_for_updates_interval_seconds = 604800
 config.font_size = 16
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
+config.scrollback_lines = 10000
 
 config.keys = { -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
 {
