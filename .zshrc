@@ -48,6 +48,20 @@ function update_profile() {
   fi
 }
 
+function delete_unwanted_branches() {
+  local KEEP_BRANCHES=("$@")
+
+  # Get all local branches
+  local ALL_BRANCHES=$(git branch | sed 's/*//g' | tr -d ' ')
+
+  # Delete branches that are not in the keep list
+  for BRANCH in $ALL_BRANCHES; do
+    if [[ ! " ${KEEP_BRANCHES[@]} " =~ " ${BRANCH} " ]]; then
+      git branch -D $BRANCH
+    fi
+  done
+}
+
 # Update paths
 path+=(
   /bin
