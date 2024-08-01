@@ -1,0 +1,27 @@
+#!/usr/bin/ruby
+
+all_branches = `git branch`.split("\n").map { |branch| branch.gsub('*', '').strip }
+branches_to_keep = (ARGV.map { |branch| branch.strip } + ['master', 'main']).inject([]) do |memo, branch|
+  memo << branch if all_branches.include?(branch)
+  memo
+end
+ARGV.clear
+
+branches_to_delete = all_branches - branches_to_keep
+
+puts branches_to_delete
+puts "Branches to keep:"
+puts "  #{branches_to_keep.join("\n  ")}"
+puts
+puts "Branches to delete:"
+puts "  #{branches_to_delete.join("\n  ")}"
+puts
+puts "Delete?"
+resp = gets
+
+if ['y', 'yes'].include?(resp.strip.downcase)
+  system("git branch -D #{branches_to_delete.join(' ')}")
+else
+  puts "Aborting"
+  exit 1
+end

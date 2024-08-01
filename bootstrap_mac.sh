@@ -128,3 +128,5 @@ if [ ! -e "/Applications/Visual Studio Code.app" ]; then
   tar -xvf VSCode-darwin-universal.zip
   mv "Visual Studio Code.app" /Applications/
 fi
+
+cp -r bin_scripts/* /usr/local/bin/
