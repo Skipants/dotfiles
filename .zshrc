@@ -39,6 +39,8 @@ function jira() {
   open "https://${JIRA_SUBDOMAIN}.atlassian.net/browse/${ticket}"
 }
 
+function mktouch() { mkdir -p $(dirname $1) && touch $1; }
+
 function update_profile() {
   if [ $(pwd -P) = $HOME ]; then
     \curl --output .zshrc https://raw.githubusercontent.com/skipants/dotfiles/master/.zshrc
