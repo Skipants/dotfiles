@@ -17,20 +17,35 @@ config.hyperlink_rules = wezterm.default_hyperlink_rules()
 config.scrollback_lines = 10000
 
 config.keys = { -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-{
-    key = "LeftArrow",
-    mods = "OPT",
-    action = wezterm.action {
-        SendString = "\x1bb"
+    {
+        key = "LeftArrow",
+        mods = "OPT",
+        action = wezterm.action {
+            SendString = "\x1bb"
+        }
+    }, -- Make Option-Right equivalent to Alt-f; forward-word
+    {
+        key = "RightArrow",
+        mods = "OPT",
+        action = wezterm.action {
+            SendString = "\x1bf"
+        }
+    },
+    { -- show the pane selection mode, but have it swap the active and selected panes
+        key = 'LeftArrow',
+        mods = 'SHIFT',
+        action = wezterm.action {
+            MoveTabRelative = -1
+        }
+    },
+    { -- show the pane selection mode, but have it swap the active and selected panes
+        key = 'RightArrow',
+        mods = 'SHIFT',
+        action = wezterm.action {
+            MoveTabRelative = 1
+        }
     }
-}, -- Make Option-Right equivalent to Alt-f; forward-word
-{
-    key = "RightArrow",
-    mods = "OPT",
-    action = wezterm.action {
-        SendString = "\x1bf"
-    }
-}}
+}
 
 -- and finally, return the configuration to wezterm
 return config
