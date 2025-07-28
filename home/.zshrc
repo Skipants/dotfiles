@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH Options
 ZSH_THEME="dracula/dracula"
 
-plugins=(git gitfast history zeus ssh-agent bundler history-substring-search brew)
+plugins=(git gitfast history zeus ssh-agent bundler history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,52 +54,48 @@ function update_profile() {
 path+=(
   /bin
   /usr/local/bin
-  /opt/homebrew/sbin
-  /opt/homebrew/bin
+  /usr/bin
+  /usr/sbin
   $HOME/bin
+  $HOME/.local/bin
   $HOME/.rd/bin # Rancher desktop
 )
 
-# Need to have brew in path before I can use the prefixes
-path+=(
-  $(brew --prefix imagemagick@6)/bin
-  $(brew --prefix libxml2)/bin
-  $(brew --prefix libxslt)/bin
-)
+# Ubuntu package paths (replacing brew --prefix paths)
+if [[ -d /usr/include/ImageMagick-6 ]]; then
+  path+=(/usr/bin)
+fi
+
+if [[ -d /usr/include/libxml2 ]]; then
+  path+=(/usr/bin)
+fi
+
+if [[ -d /usr/include/libxslt ]]; then
+  path+=(/usr/bin)
+fi
 
 LDFLAGS+=(
-  -L$(brew --prefix imagemagick@6)/lib
-  -L$(brew --prefix libffi)/lib
-  -L$(brew --prefix libxml2)/lib
-  -L$(brew --prefix libxslt)/lib
-  -L$(brew --prefix mysql@5.7)/lib
-  -L$(brew --prefix zlib)/lib
+  -L/usr/lib/x86_64-linux-gnu
+  -L/usr/lib
 )
 
 CPPFLAGS+=(
-  -I$(brew --prefix imagemagick@6)/include
-  -I$(brew --prefix libxml2)/include
-  -I$(brew --prefix libxslt)/include
-  -I$(brew --prefix mysql@5.7)/include
-  -I$(brew --prefix zlib)/include
+  -I/usr/include
+  -I/usr/include/ImageMagick-6
+  -I/usr/include/libxml2
+  -I/usr/include/libxslt
+  -I/usr/include/mysql
 )
 
 PKG_CONFIG_PATH+=(
-  $(brew --prefix imagemagick@6)/lib/pkgconfig
-  $(brew --prefix libffi)/lib/pkgconfig
-  $(brew --prefix libxml2)/lib/pkgconfig
-  $(brew --prefix libxslt)/lib/pkgconfig
-  $(brew --prefix mysql@5.7)/lib/pkgconfig
-  $(brew --prefix zlib)/lib/pkgconfig
+  /usr/lib/x86_64-linux-gnu/pkgconfig
+  /usr/lib/pkgconfig
+  /usr/share/pkgconfig
 )
 
-# Homebrew autocompletion
-if type brew &>/dev/null; then
-  fpath+=("$(brew --prefix)/share/zsh/site-functions")
-
-  autoload -Uz compinit
-  compinit
-fi
+# Ubuntu package completion (replacing Homebrew autocompletion)
+autoload -Uz compinit
+compinit
 
 # Global Aliases
 #  This allows these commands to be piped to rather than just used on their own
@@ -107,7 +103,7 @@ alias -g be="bundle exec"
 alias -g vi=vim
 
 # Aliases
-alias aws-mfa='oathtool --totp --base32 --digits=6 $AWS_WONOLO_TOTP_KEY | pbcopy'
+alias aws-mfa='oathtool --totp --base32 --digits=6 $AWS_WONOLO_TOTP_KEY | xclip -selection clipboard'
 alias tf=terraform
 
 # Bindkeys
@@ -118,7 +114,7 @@ bindkey '^e' end-of-line
 
 # Other environment variables
 export BUNDLE_BUILD__GITHUB___MARKDOWN="--with-cflags=-Wno-error=implicit-function-declaration"
-export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L$(brew --prefix openssl)/lib --with-cppflags=-I$(brew --prefix openssl)/include"
+export BUNDLE_BUILD__MYSQL2="--with-ldflags=-L/usr/lib/x86_64-linux-gnu --with-cppflags=-I/usr/include/mysql"
 export BUNDLE_BUILD__THIN="--with-cflags=-Wno-error=implicit-function-declaration"
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
@@ -136,14 +132,14 @@ if [ -s ~/.secrets.env ]; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bun completions
-[ -s "/Users/aszczepanski/.bun/_bun" ] && source "/Users/aszczepanski/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-eval "$(/Users/aszczepanski/.local/bin/mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
