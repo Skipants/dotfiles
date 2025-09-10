@@ -104,15 +104,15 @@ if [ ! -e ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ]; then
 fi
 
 if [ ! -e ~/.pryrc ]; then
-  cp "$(pwd -P)/.pryrc" ~/
+  cp "$(pwd -P)/macos_home/.pryrc" ~/
 fi
 
 if [ ! -e ~/.vimrc ]; then
-  cp "$(pwd -P)/.vimrc" ~/
+  cp "$(pwd -P)/macos_home/.vimrc" ~/
 fi
 
 if [ ! -e ~/.zshrc ]; then
-  cp "$(pwd -P)/.zshrc" ~/
+  cp "$(pwd -P)/macos_home/.zshrc" ~/
 fi
 
 mise use -g ruby@latest
@@ -129,4 +129,4 @@ if [ ! -e "/Applications/Visual Studio Code.app" ]; then
   mv "Visual Studio Code.app" /Applications/
 fi
 
-cp -r bin_scripts/* /usr/local/bin/
+cp -r macos_home/bin/* /usr/local/bin/

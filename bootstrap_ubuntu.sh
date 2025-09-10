@@ -148,4 +148,4 @@ fi
 
 sudo apt install wezterm
 
-stow home
+stow ubuntu_home
