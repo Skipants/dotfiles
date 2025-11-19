@@ -57,6 +57,7 @@ path+=(
   /opt/homebrew/sbin
   /opt/homebrew/bin
   $HOME/bin
+  $HOME/.local/bin
   $HOME/.rd/bin # Rancher desktop
 )
 
@@ -137,10 +138,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # bun completions
-[ -s "/Users/aszczepanski/.bun/_bun" ] && source "/Users/aszczepanski/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-eval "$(/Users/aszczepanski/.local/bin/mise activate zsh)"
+eval "$($HOME/.local/bin/mise activate zsh)"

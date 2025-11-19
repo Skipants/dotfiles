@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -u
+set -ux
 
 cd "$(dirname $0)" || exit
 
@@ -34,13 +34,14 @@ brew install gnutls
 brew install go
 brew install htop
 brew install jpeg
-brew install mas
+brew install mise
 brew install nvm
 brew install openssl
 brew install postgresql
 brew install redis
 brew install shellcheck
 brew install sqlite
+brew install stow
 brew install terraform
 brew install vim
 brew install zlib
@@ -48,51 +49,17 @@ brew install zsh
 
 $(pwd -P)/git_setup.sh
 
-curl https://mise.run | sh
-eval "$(/Users/aszczepanski/.local/bin/mise activate zsh)"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
 brew install --cask chromedriver
 brew install --cask firefox
+brew install --cask google-chrome
 brew install --cask libreoffice
+brew install --cask obsidian
+brew install --cask rectangle
+brew install --cask slack
 brew install --cask spotify
 brew install --cask spotmenu
-
-
-# I have to look into my license with this
-# if [ ! -d "/Applications/Skitch.app" ]; then
-#   mas install 425955336 # Skitch
-# fi
-
-if [ ! -e "/Applications/Slack.app" ]; then
-  mas install 803453959 # Slack
-fi
-
-function installdmg {
-    set -x
-    tempd=$(mktemp -d)
-    curl $1 > $tempd/pkg.dmg
-    listing=$(sudo hdiutil attach $tempd/pkg.dmg | grep Volumes)
-    volume=$(echo "$listing" | cut -f 3)
-    if [ -e "$volume"/*.app ]; then
-      sudo cp -rf "$volume"/*.app /Applications
-    elif [ -e "$volume"/*.pkg ]; then
-      package=$(ls -1 "$volume" | grep .pkg | head -1)
-      sudo installer -pkg "$volume"/"$package" -target /
-    fi
-    sudo hdiutil detach "$(echo "$listing" | cut -f 1)"
-    rm -rf $tempd
-    set +x
-}
-
-# This failed installing -- the download worked fine though
-# if [ ! -d "/Applications/Rancher Desktop.app" ]; then
-#  installdmg https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.12.2/Rancher.Desktop-1.12.2.aarch64.dmg
-# fi
-
-if [ ! -e "/Applications/Google Chrome.app" ]; then
-  installdmg https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
-fi
+brew install --cask visual-studio-code
+brew install --cask wezterm
 
 if [ ! -e ~/.oh-my-zsh ]; then
   rm ~/.zshrc # Prevent oh my zsh from making a copy
@@ -103,18 +70,6 @@ if [ ! -e ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ]; then
   git clone https://github.com/dracula/zsh.git ~/.oh-my-zsh/themes/dracula
 fi
 
-if [ ! -e ~/.pryrc ]; then
-  cp "$(pwd -P)/macos_home/.pryrc" ~/
-fi
-
-if [ ! -e ~/.vimrc ]; then
-  cp "$(pwd -P)/macos_home/.vimrc" ~/
-fi
-
-if [ ! -e ~/.zshrc ]; then
-  cp "$(pwd -P)/macos_home/.zshrc" ~/
-fi
-
 mise use -g ruby@latest
 gem install bundler
 
@@ -123,10 +78,6 @@ if [[ ! -f ~/.vim/colors/monokai.vim ]]; then
   (cd ~/.vim/colors/ && curl -O https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim)
 fi
 
-if [ ! -e "/Applications/Visual Studio Code.app" ]; then
-  curl "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
-  tar -xvf VSCode-darwin-universal.zip
-  mv "Visual Studio Code.app" /Applications/
-fi
-
 cp -r macos_home/bin/* /usr/local/bin/
+
+stow macos_home
