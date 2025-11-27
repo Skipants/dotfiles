@@ -102,11 +102,14 @@ fi
 # Global Aliases
 #  This allows these commands to be piped to rather than just used on their own
 alias -g be="bundle exec"
+alias tf=terraform
 alias -g vi=vim
 
-# Aliases
+# Wonolo Specific Aliases
 alias aws-mfa='oathtool --totp --base32 --digits=6 $AWS_WONOLO_TOTP_KEY | pbcopy'
-alias tf=terraform
+alias pic="picnic exec"
+alias vpn-down='/opt/homebrew/bin/bash wg-quick down ~/wireguard-configs/wonolo-vpn.conf'
+alias vpn-up='/opt/homebrew/bin/bash wg-quick up ~/wireguard-configs/wonolo-vpn.conf'
 
 # Bindkeys
 bindkey -e
