@@ -107,7 +107,7 @@ alias -g vi=vim
 
 # Wonolo Specific Aliases
 alias aws-mfa='oathtool --totp --base32 --digits=6 $AWS_WONOLO_TOTP_KEY | pbcopy'
-alias pic="picnic exec"
+alias picx="picnic exec"
 alias vpn-down='/opt/homebrew/bin/bash wg-quick down ~/wireguard-configs/wonolo-vpn.conf'
 alias vpn-up='/opt/homebrew/bin/bash wg-quick up ~/wireguard-configs/wonolo-vpn.conf'
 
@@ -148,3 +148,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$($HOME/.local/bin/mise activate zsh)"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/nomad nomad
