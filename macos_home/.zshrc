@@ -52,13 +52,10 @@ function update_profile() {
 
 # Update paths
 path+=(
-  /bin
-  /usr/local/bin
   /opt/homebrew/sbin
   /opt/homebrew/bin
   $HOME/bin
   $HOME/.local/bin
-  $HOME/.rd/bin # Rancher desktop
 )
 
 # Need to have brew in path before I can use the prefixes
@@ -89,6 +86,11 @@ PKG_CONFIG_PATH+=(
   $(brew --prefix libxml2)/lib/pkgconfig
   $(brew --prefix libxslt)/lib/pkgconfig
   $(brew --prefix zlib)/lib/pkgconfig
+)
+
+path+=(
+  /usr/local/bin
+  /bin
 )
 
 # Homebrew autocompletion
