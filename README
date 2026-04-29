@@ -6,6 +6,8 @@ Install
 
 1. Install git
 2. Pull this repo
-3. Run bootstrap_$ENV.sh
+3. Run bootstrap_$OSNAME.sh
 
 Afterwards, install VSCode and in its command palette run "install 'code' command to PATH"
+
+To quickly add dotfiles to local home, run `stow -R ${OSNAME}_home` from dotfiles/

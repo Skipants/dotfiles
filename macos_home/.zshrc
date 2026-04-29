@@ -138,6 +138,13 @@ if [ -s ~/.secrets.env ]; then
   set +o allexport
 fi
 
+# Convention for general environment variables
+if [ -s ~/.env ]; then
+  set -o allexport
+  source ~/.env
+  set +o allexport
+fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
@@ -153,3 +160,5 @@ eval "$($HOME/.local/bin/mise activate zsh)"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/nomad nomad
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

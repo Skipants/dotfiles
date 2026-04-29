@@ -131,6 +131,14 @@ if [ -s ~/.secrets.env ]; then
   set +o allexport
 fi
 
+# Convention for general environment variables
+if [ -s ~/.env ]; then
+  set -o allexport
+  source ~/.env
+  set +o allexport
+fi
+
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
