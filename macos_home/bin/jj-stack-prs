@@ -1,0 +1,53 @@
+#!/opt/homebrew/bin/bash
+set -euo pipefail
+
+base_rev="${1:-@}"
+trunk="$(jj log -r 'trunk()' --no-graph -T 'bookmarks' 2>/dev/null | tr -d '*' | head -1)"
+trunk="${trunk:-master}"
+
+# oldest -> newest change ids in the stack
+mapfile -t change_ids < <(jj log -r "${base_rev}::" --no-graph -T 'change_id.short() ++ "\n"')
+
+# jj log is newest-first, PRs must be made oldest-first, so reverse in place
+reversed_ids=()
+for ((i = ${#change_ids[@]} - 1; i >= 0; i--)); do
+  reversed_ids+=("${change_ids[i]}")
+done
+change_ids=("${reversed_ids[@]}")
+
+prev_bookmark="$trunk"
+
+for cid in "${change_ids[@]}"; do
+  [[ -z "$cid" ]] && continue
+
+  full_desc="$(jj log -r "$cid" --no-graph -T 'description')"
+  mapfile -t desc_lines <<< "$full_desc"
+  title="${desc_lines[0]:-}"
+  if [[ -z "$title" ]]; then
+    echo "commit $cid has no description, run jj describe first"
+    exit 1
+  fi
+
+  body=""
+  if (( ${#desc_lines[@]} > 1 )); then
+    body="$(printf '%s\n' "${desc_lines[@]:1}")"
+    body="${body#$'\n'}"   # drop the blank-line separator between title and body, if present
+    body="${body%$'\n'}"   # printf added a trailing newline, trim it
+  fi
+
+  bookmark="$(jj bookmark list -r "$cid" -T 'name ++ "\n"' | head -1)"
+  if [[ -z "$bookmark" ]]; then
+    echo "commit $cid ($title) has no bookmark, run: jj bookmark create <name> -r $cid"
+    exit 1
+  fi
+
+  jj git push --bookmark "$bookmark"
+
+  if gh pr view "$bookmark" >/dev/null 2>&1; then
+    gh pr edit "$bookmark" --base "$prev_bookmark" --title "$title" --body "$body"
+  else
+    gh pr create --base "$prev_bookmark" --head "$bookmark" --title "$title" --body "$body"
+  fi
+
+  prev_bookmark="$bookmark"
+done
